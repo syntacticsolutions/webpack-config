@@ -1,19 +1,32 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 // const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const path = require("path")
-const CompressionPlugin = require("compression-webpack-plugin");
+// const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
+    publicPath: 'auto',
     path: path.resolve(__dirname, "../build"),
     filename: "[name].[contenthash].js",
     chunkFilename: "[name].[contenthash].js",
-    publicPath: "",
     assetModuleFilename: "images/[hash][ext][query]"
   },
-  mode: "production",
+  optimization: {
+    runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  },
+  mode: "development",
   module: {
     rules: [
       {
@@ -45,8 +58,6 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
   },
   plugins: [
-    new CompressionPlugin(),
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       favicon: "./public/favicon.ico"

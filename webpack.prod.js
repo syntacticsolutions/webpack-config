@@ -1,23 +1,11 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { default: merge } = require("webpack-merge")
-const common = require("./webpack.common")
+const common = require("./webpack.common");
+const mfeConfig = require('./webpack.mfe');
 
 const prodConfig = {
   mode: "production",
   devtool: "source-map",
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
-        }
-      }
-    }
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "./dist/styles/[name].css"
@@ -44,4 +32,4 @@ const prodConfig = {
   }
 }
 
-module.exports = merge(common, prodConfig)
+module.exports = merge(common, prodConfig, mfeConfig);

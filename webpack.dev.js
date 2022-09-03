@@ -2,17 +2,21 @@ const { HotModuleReplacementPlugin } = require("webpack")
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 const { default: merge } = require("webpack-merge")
 const common = require("./webpack.common")
+const mfeConfig = require('./webpack.mfe');
+const path = require("path");
+require('dotenv').config()
 
 const devConfig = {
   mode: "development",
   devServer: {
-    port: 3000,
-    contentBase: "../build",
-    hot: true,
+    port: process.env.PORT || 3000,
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
+    liveReload: true,
     historyApiFallback: true
   },
   target: "web",
-  plugins: [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
   devtool: "eval-source-map",
   module: {
     rules: [
@@ -35,4 +39,4 @@ const devConfig = {
   }
 }
 
-module.exports = merge(common, devConfig)
+module.exports = merge(common, devConfig, mfeConfig || {});
