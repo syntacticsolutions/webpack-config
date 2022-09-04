@@ -13,19 +13,6 @@ module.exports = {
     chunkFilename: "[name].[contenthash].js",
     assetModuleFilename: "images/[hash][ext][query]"
   },
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
-        }
-      }
-    }
-  },
   mode: "development",
   module: {
     rules: [
