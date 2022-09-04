@@ -14,14 +14,14 @@ module.exports = {
     assetModuleFilename: "images/[hash][ext][query]"
   },
   optimization: {
-    runtimeChunk: "single",
+    runtimeChunk: undefined,
     splitChunks: {
-      chunks: "all",
+      chunks: "async",
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          chunks: "all"
+          chunks: "async"
         }
       }
     }
