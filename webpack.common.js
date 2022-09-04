@@ -13,19 +13,6 @@ module.exports = {
     chunkFilename: "[name].[contenthash].js",
     assetModuleFilename: "images/[hash][ext][query]"
   },
-  // optimization: {
-  //   runtimeChunk: "single",
-  //   splitChunks: {
-  //     chunks: "all",
-  //     cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: "vendors",
-  //         chunks: "async"
-  //       }
-  //     }
-  //   }
-  // },
   mode: "development",
   module: {
     rules: [
@@ -57,10 +44,5 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
   },
-  plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: "./public/index.html",
-    //   favicon: "./public/favicon.ico"
-    // })
-  ]
+  plugins: []
 }
